@@ -1,5 +1,5 @@
-# helm install -f ./configuration-cluster-agent.yaml "hvmk" appdynamics-charts/cluster-agent --namespace=appdynamics
-# helm upgrade -f ./configuration-cluster-agent.yaml "hvmk-eks" appdynamics-charts/cluster-agent --namespace=appdynamics
+# helm install -f /Users/mahkadam/kubernetes/mhkadam-k8-lab-charts/configuration-cluster-agent.yaml "hvmk" appdynamics-charts/cluster-agent --namespace=appdynamics
+# helm upgrade -f /Users/mahkadam/kubernetes/mhkadam-k8-lab-charts/configuration-cluster-agent.yaml "hvmk-eks" appdynamics-charts/cluster-agent --namespace=appdynamics
 
 deploymentMode: PRIMARY
 
