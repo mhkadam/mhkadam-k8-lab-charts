@@ -151,8 +151,10 @@ instrumentationConfig:
         imagePullPolicy: Always
     - namespaceRegex: java-apps
       #matchString: stream
+
+      customAgentConfig: "-Dotel.metrics.exporter=otlp -Dotel.exporter.otlp.traces.endpoint=otel-collector.appdynamics.svc.cluster.local Dotel.traces.exporter=otlp -Dappdynamics.opentelemetry.enabled=true"
       language: java
-      appName: java-hvmk
+      appName: java-hvmk-otel-k8
       imageInfo:
         image: "docker.io/appdynamics/java-agent:22.12.0"
         agentMountPath: /opt/appdynamics
