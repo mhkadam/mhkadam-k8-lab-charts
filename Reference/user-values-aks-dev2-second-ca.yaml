@@ -1,0 +1,87 @@
+## helm upgrade --install -f ./user-values-aks-dev2.yaml aks-dev-cluster2 ./ --namespace=appdynamics-2 --version 1.7.0
+## AppDynamics Cluster Agent configuration file
+## All the comments start with two or more # characters
+
+deploymentMode: NAMESPACED
+
+installClusterAgent: true
+installInfraViz: false
+
+# Docker images
+imageInfo:
+  agentImage: artifactory.it.jetblue.com/b6-appd-agents/appdynamics/cluster-agent
+  agentTag: 22.11.0
+  operatorImage: artifactory.it.jetblue.com/b6-appd-agents/appdynamics/cluster-agent-operator
+  operatorTag: 22.11.0
+  machineAgentImage: artifactory.it.jetblue.com/b6-appd-agents/appdynamics/machine-agent-analytics
+  machineAgentTag: 22.9.0
+  imagePullPolicy: Always 
+  imagePullSecrets: artifactory.b6nonprod.read.secret
+
+# AppDynamics controller info
+controllerInfo:
+  url: https://jetblue-test.saas.appdynamics.com:443
+  account: jetblue-test         
+  username: api.user@jetblue-test
+  password: Welcome1
+  accessKey: 56a8e4a8-644c-4d5e-bffa-e360e18933ef
+  globalAccount: jetblue-test_910bbaf1-f6ed-4175-a38f-3dc6fd3129b7
+
+# Cluster agent config
+clusterAgent:
+  nsToMonitorRegex: ^kube-system$|^sumologic$|^calico-system$|^appdynamics$|^aadpodidentity$|^twistlock$|^ingress-nginx$
+  nsToExcludeRegex: 
+  imagePullSecret: artifactory.b6nonprod.read.secret
+  logProperties:
+    logLevel: INFO
+
+# Agent pod specific properties
+# When you perform auto-instrumentation, you need to increase the memory limits by 50Mi for every 100 pods. 
+# For Example, If 500 pods are instrumented through the agent, add 550Mi (300Mi + 250Mi) to the memory limits value.
+# Increase the CPU limits by 100m ( 1350m ) when auto-instrumentation is enabled.
+agentPod:
+#  tolerations:
+#  - key: CriticalAddonsOnly
+#    operator: Exists
+  resources:
+    limits:
+      cpu: "1350m"
+      memory: "1000Mi"
+    requests:
+      cpu: "750m"
+      memory: "500Mi"
+
+# Operator pod specific properties
+operatorPod:
+#  tolerations:
+#  - key: CriticalAddonsOnly
+#    operator: Exists
+  resources:
+    limits:
+      cpu: 200m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 64Mi
+
+# Infraviz pod specific properties
+infravizPod:
+  tolerations:
+  - key: CriticalAddonsOnly
+    operator: Exists
+  - key: jobtype
+    operator: Exists
+  resources:
+    limits:
+      cpu: 500m
+      memory: "1G"
+    requests:
+      cpu: 200m
+      memory: "800M"
+  imagePullSecret: artifactory.b6nonprod.read.secret
+  priorityClassName: system-node-critical
+
+# RBAC config
+agentServiceAccount: appdynamics-cluster-agent
+operatorServiceAccount: appdynamics-operator
+infravizServiceAccount: appdynamics-infraviz
