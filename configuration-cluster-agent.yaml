@@ -153,9 +153,9 @@ instrumentationConfig:
     - namespaceRegex: java-apps
       #matchString: stream
 
-      customAgentConfig: "-Dotel.metrics.exporter=otlp -Dotel.exporter.otlp.traces.endpoint=simplest-collector.opentelemetry-operator-system.svc.cluster.local:4317 Dotel.traces.exporter=otlp -Dappdynamics.opentelemetry.enabled=true -Dotel.resource.attributes=\"service.name=otel-eks,service.namespace=java-hvmk-otel-k8\""
+      customAgentConfig: "-Dotel.metrics.exporter=otlp -Dotel.exporter.otlp.traces.endpoint=simplest-collector.opentelemetry-operator-system.svc.cluster.local:4317 Dotel.traces.exporter=otlp -Dappdynamics.opentelemetry.enabled=true -Dotel.resource.attributes=\"service.name=otel-eks,service.namespace=java-hvmk-k8\""
       language: java
-      appName: java-hvmk-otel-k8
+      appName: java-hvmk-k8
       imageInfo:
         image: "docker.io/appdynamics/java-agent:22.12.0"
         agentMountPath: /opt/appdynamics
