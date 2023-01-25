@@ -1,5 +1,6 @@
 # helm install -f ./configuration-cluster-agent.yaml "hvmk" appdynamics-charts/cluster-agent --namespace=appdynamics
-# Update test 123
+# helm upgrade -f ./configuration-cluster-agent.yaml "hvmk-eks" appdynamics-charts/cluster-agent --namespace=appdynamics
+
 deploymentMode: PRIMARY
 
 installClusterAgent: true
