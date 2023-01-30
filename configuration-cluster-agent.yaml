@@ -1,6 +1,6 @@
 # helm install -f /Users/mahkadam/kubernetes/mhkadam-k8-lab-charts/configuration-cluster-agent.yaml "hvmk-eks" appdynamics-charts/cluster-agent --namespace=appdynamics
 # helm upgrade -f /Users/mahkadam/kubernetes/mhkadam-k8-lab-charts/configuration-cluster-agent.yaml "hvmk-eks" appdynamics-charts/cluster-agent --namespace=appdynamics
-
+# kubectl -n java-apps port-forward deployments/restservice :8080
 deploymentMode: PRIMARY
 
 installClusterAgent: true
