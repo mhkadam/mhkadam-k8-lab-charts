@@ -1,4 +1,4 @@
-# helm install -f /Users/mahkadam/kubernetes/mhkadam-k8-lab-charts/configuration-cluster-agent.yaml "hvmk" appdynamics-charts/cluster-agent --namespace=appdynamics
+# helm install -f /Users/mahkadam/kubernetes/mhkadam-k8-lab-charts/configuration-cluster-agent.yaml "hvmk-eks" appdynamics-charts/cluster-agent --namespace=appdynamics
 # helm upgrade -f /Users/mahkadam/kubernetes/mhkadam-k8-lab-charts/configuration-cluster-agent.yaml "hvmk-eks" appdynamics-charts/cluster-agent --namespace=appdynamics
 
 deploymentMode: PRIMARY
@@ -150,7 +150,7 @@ instrumentationConfig:
         #image: "docker.io/appdynamics/nodejs-agent:21.1.0-10.0.0-alpine"
         agentMountPath: /opt/appdynamics
         imagePullPolicy: Always
-    - namespaceRegex: 123java-apps
+    - namespaceRegex: java-apps
       #matchString: stream
 
       #customAgentConfig: "-Dotel.metrics.exporter=otlp -Dotel.traces.exporter=otlp -Dotel.exporter.otlp.traces.endpoint=http://my-opentelemetry-collector.default.svc.cluster.local:4317 -Dappdynamics.opentelemetry.enabled=true -Dotel.resource.attributes=\"service.name=otel-eks,service.namespace=java-hvmk-k8\""
