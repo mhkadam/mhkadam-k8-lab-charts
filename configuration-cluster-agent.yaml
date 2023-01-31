@@ -122,7 +122,7 @@ stdoutLogging: "true"
 instrumentationConfig:
   enabled: true
   instrumentationMethod: Env
-  nsToInstrumentRegex: java-apps
+  nsToInstrumentRegex: java-apps|default
   appNameStrategy: manual
   defaultAppName: JavaAuto-Helm
   numberOfTaskWorkers: 2
@@ -150,9 +150,8 @@ instrumentationConfig:
         #image: "docker.io/appdynamics/nodejs-agent:21.1.0-10.0.0-alpine"
         agentMountPath: /opt/appdynamics
         imagePullPolicy: Always
-    - namespaceRegex: java-apps
+    - namespaceRegex: 123java-apps
       #matchString: stream
-
       #customAgentConfig: "-Dotel.metrics.exporte r=otlp -Dotel.traces.exporter=otlp -Dotel.exporter.otlp.traces.endpoint=http://my-opentelemetry-collector.default.svc.cluster.local:4317 -Dappdynamics.opentelemetry.enabled=true -Dotel.resource.attributes=\"service.name=otel-eks,service.namespace=java-hvmk-k8\""
       language: java
       appName: java-hvmk-k8
