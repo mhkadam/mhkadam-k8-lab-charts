@@ -153,12 +153,23 @@ instrumentationConfig:
     - namespaceRegex: java-apps
       #matchString: stream
 
-      #customAgentConfig: "-Dotel.metrics.exporter=otlp -Dotel.traces.exporter=otlp -Dotel.exporter.otlp.traces.endpoint=http://my-opentelemetry-collector.default.svc.cluster.local:4317 -Dappdynamics.opentelemetry.enabled=true -Dotel.resource.attributes=\"service.name=otel-eks,service.namespace=java-hvmk-k8\""
+      #customAgentConfig: "-Dotel.metrics.exporte r=otlp -Dotel.traces.exporter=otlp -Dotel.exporter.otlp.traces.endpoint=http://my-opentelemetry-collector.default.svc.cluster.local:4317 -Dappdynamics.opentelemetry.enabled=true -Dotel.resource.attributes=\"service.name=otel-eks,service.namespace=java-hvmk-k8\""
       language: java
       appName: java-hvmk-k8
       imageInfo:
         image: "docker.io/appdynamics/java-agent:22.12.0"
         agentMountPath: /opt/appdynamics
-        imagePullPolicy: Always        
+        imagePullPolicy: Always  
+    
+    - namespaceRegex: default
+      matchString: my-otel-demo-adservice
+      #customAgentConfig: "-Dotel.metrics.exporte r=otlp -Dotel.traces.exporter=otlp -Dotel.exporter.otlp.traces.endpoint=http://my-otel-demo-otelcol.default.svc.cluster.local:4317 -Dappdynamics.opentelemetry.enabled=true -Dotel.resource.attributes=\"service.name=ad-service-java,service.namespace=otel-demo-app\""
+      language: java
+      appName: otel-demo-app-with-appd
+      imageInfo:
+        image: "docker.io/appdynamics/java-agent:22.12.0"
+        agentMountPath: /opt/appdynamics
+        imagePullPolicy: Always              
+        
 #=====
 
