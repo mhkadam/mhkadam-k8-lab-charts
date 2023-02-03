@@ -158,7 +158,7 @@ instrumentationConfig:
       language: java
       appName: java-hvmk-k8
       tierNameLabel: appd-tier
-            imageInfo:
+      imageInfo:
         image: "docker.io/appdynamics/java-agent:22.12.0"
         agentMountPath: /opt/appdynamics
         imagePullPolicy: Always  
