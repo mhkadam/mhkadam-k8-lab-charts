@@ -1,5 +1,5 @@
-# helm install -f /Users/mahkadam/kubernetes/mhkadam-k8-lab-charts/configuration-cluster-agent.yaml "hvmk-eks" appdynamics-charts/cluster-agent --namespace=appdynamics
-# helm upgrade -f /Users/mahkadam/kubernetes/mhkadam-k8-lab-charts/configuration-cluster-agent.yaml "hvmk-eks" appdynamics-charts/cluster-agent --namespace=appdynamics
+# helm install -f /Users/mahkadam/kubernetes/mhkadam-k8-lab-charts/configuration-cluster-agent.yaml "hvmk-aws-eks" appdynamics-charts/cluster-agent --namespace=appdynamics
+# helm upgrade -f /Users/mahkadam/kubernetes/mhkadam-k8-lab-charts/configuration-cluster-agent.yaml "hvmk-aws-eks" appdynamics-charts/cluster-agent --namespace=appdynamics
 # kubectl -n java-apps port-forward deployments/restservice :8080
 deploymentMode: PRIMARY
 
@@ -124,6 +124,7 @@ instrumentationConfig:
   instrumentationMethod: Env
   nsToInstrumentRegex: java-apps|default
   appNameStrategy: manual
+  tierNameStrategy: label
   defaultAppName: JavaAuto-Helm
   numberOfTaskWorkers: 2
   imagePullPolicy: Always
@@ -151,14 +152,13 @@ instrumentationConfig:
         agentMountPath: /opt/appdynamics
         imagePullPolicy: Always
     - namespaceRegex: java-apps
-      tierNameStrategy: label
+      
       #matchString: stream
       #customAgentConfig: "-Dotel.metrics.exporte r=otlp -Dotel.traces.exporter=otlp -Dotel.exporter.otlp.traces.endpoint=http://my-opentelemetry-collector.default.svc.cluster.local:4317 -Dappdynamics.opentelemetry.enabled=true -Dotel.resource.attributes=\"service.name=otel-eks,service.namespace=java-hvmk-k8\""
       language: java
       appName: java-hvmk-k8
       tierNameLabel: appd-tier
-      
-      imageInfo:
+            imageInfo:
         image: "docker.io/appdynamics/java-agent:22.12.0"
         agentMountPath: /opt/appdynamics
         imagePullPolicy: Always  
@@ -168,6 +168,7 @@ instrumentationConfig:
       #customAgentConfig: "-Dotel.metrics.exporte r=otlp -Dotel.traces.exporter=otlp -Dotel.exporter.otlp.traces.endpoint=http://my-otel-demo-otelcol.default.svc.cluster.local:4317 -Dappdynamics.opentelemetry.enabled=true -Dotel.resource.attributes=\"service.name=ad-service-java,service.namespace=otel-demo-app\""
       language: java
       appName: otel-demo-app-with-appd
+      tierName: ""
       imageInfo:
         image: "docker.io/appdynamics/java-agent:22.12.0"
         agentMountPath: /opt/appdynamics
