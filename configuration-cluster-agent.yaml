@@ -158,8 +158,8 @@ instrumentationConfig:
       appName: java-hvmk-restservice
       tierNameLabel: appd-tier
       customAgentConfigSource:
-        - configMapName:: agent-custom-correlation
-          subDir: /ver22.12.0/conf/
+       - configMapName: agent-custom-correlation
+         subDir: /ver22.12.0.34603/conf/
       imageInfo:
         image: "docker.io/appdynamics/java-agent:22.12.0"
         agentMountPath: /opt/appdynamics
